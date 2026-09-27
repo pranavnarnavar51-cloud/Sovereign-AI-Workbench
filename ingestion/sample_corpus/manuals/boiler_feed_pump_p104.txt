@@ -1,0 +1,20 @@
+# TECHNICAL SPECIFICATION & OEM OPERATING MANUAL
+## Equipment Tag: BFP-P-104 (High Pressure Boiler Feed Pump)
+Manufacturer: KSB Sulzer Heavy Power Machinery
+Installation Date: 2021-04-15
+Operating Fluid: Deaerated Demineralized Feedwater at 145°C
+
+## 1. Operating Boundaries and Vibration Limits (ISO 10816-3 Class I & II)
+The vibration velocity RMS limits for continuous operation on the Drive End (DE) and Non-Drive End (NDE) bearings are as follows:
+- Zone A (< 2.3 mm/s RMS): Newly commissioned equipment condition.
+- Zone B (2.3 to 4.5 mm/s RMS): Acceptable for unrestricted continuous operation.
+- Zone C (4.5 to 7.1 mm/s RMS): Unsatisfactory; early warning of bearing cage degradation or unbalance.
+- Zone D (> 7.1 mm/s RMS): TRIP THRESHOLD. Critical danger of catastrophic bearing seizure. Immediate load reduction or trip required.
+
+## 2. Lubrication & Bearing Thermal Limits
+- Maximum allowable bearing metal temperature: 95.0°C.
+- High alarm limit: 85.0°C.
+- Lubricant: ISO VG 46 Turbine Oil with forced lubrication pressure at 2.5 bar.
+
+## 3. Mandatory Human-In-The-Loop (HITL) Emergency Procedures
+Under no circumstances may an automated system throttle or trip BFP-P-104 without explicit confirmation from the Shift Charge Engineer or Plant Director, as rapid trip of the primary boiler feed pump may induce thermal shock or boiler water wall tube starvation.

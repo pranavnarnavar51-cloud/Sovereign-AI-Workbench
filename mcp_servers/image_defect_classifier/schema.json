@@ -1,0 +1,11 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ImageDefectClassifierTool",
+  "description": "Performs local computer vision defect segmentation on radiographs, weld inspections, and thermal scans",
+  "type": "object",
+  "required": ["image_source"],
+  "properties": {
+    "image_source": {"type": "string", "description": "Base64 string or file path"},
+    "modality": {"type": "string", "enum": ["XRAY_WELD", "THERMAL_IR", "SURFACE_OPTICAL"]}
+  }
+}

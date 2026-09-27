@@ -1,0 +1,12 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SQLTelemetryRunnerTool",
+  "description": "Executes read-only SQL queries against TimescaleDB for equipment telemetry history",
+  "type": "object",
+  "required": ["equipment_tag", "time_window_minutes"],
+  "properties": {
+    "equipment_tag": {"type": "string"},
+    "sensor_types": {"type": "array", "items": {"type": "string"}},
+    "time_window_minutes": {"type": "integer", "default": 60}
+  }
+}

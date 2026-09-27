@@ -1,0 +1,25 @@
+# Helm values for air-gapped local Ollama deployment
+replicaCount: 1
+image:
+  repository: ollama/ollama
+  tag: latest
+  pullPolicy: IfNotPresent
+
+resources:
+  limits:
+    nvidia.com/gpu: 2
+    memory: 64Gi
+    cpu: 16
+  requests:
+    nvidia.com/gpu: 2
+    memory: 32Gi
+    cpu: 8
+
+persistence:
+  enabled: true
+  storageClass: "local-nvme"
+  size: 500Gi
+
+env:
+  OLLAMA_KEEP_ALIVE: "24h"
+  OLLAMA_NUM_PARALLEL: 4

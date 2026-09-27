@@ -1,0 +1,14 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "WorkOrderDraftTool",
+  "description": "Generates formal SAP PM / IBM Maximo maintenance work orders requiring HITL approval",
+  "type": "object",
+  "required": ["equipment_tag", "priority", "description", "required_craft"],
+  "properties": {
+    "equipment_tag": {"type": "string"},
+    "priority": {"type": "string", "enum": ["EMERGENCY_TIER_1", "URGENT_24H", "ROUTINE_PLANNED"]},
+    "description": {"type": "string"},
+    "required_craft": {"type": "string"},
+    "estimated_downtime_hours": {"type": "number"}
+  }
+}

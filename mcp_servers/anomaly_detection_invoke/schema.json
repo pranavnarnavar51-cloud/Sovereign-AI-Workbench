@@ -1,0 +1,14 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AnomalyDetectionInvokeTool",
+  "description": "Performs local Isolation Forest / Z-score multi-sensor anomaly detection",
+  "type": "object",
+  "required": ["sensor_data"],
+  "properties": {
+    "sensor_data": {
+      "type": "array",
+      "items": {"type": "number"}
+    },
+    "sensitivity_sigma": {"type": "number", "default": 2.5}
+  }
+}

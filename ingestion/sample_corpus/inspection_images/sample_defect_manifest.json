@@ -1,0 +1,27 @@
+{
+  "inspection_batch_id": "NDT-BATCH-2026-0921",
+  "facility": "Western Cogen Unit 4",
+  "samples": [
+    {
+      "image_id": "WELD_XR_P104_DISCH_01",
+      "component": "High Pressure Discharge Pipe Weld W-42",
+      "modality": "Radiographic X-Ray NDT",
+      "defects": [
+        {
+          "type": "Root Incomplete Penetration",
+          "severity": "CRITICAL",
+          "coordinates": {"x": 120, "y": 95, "w": 180, "h": 40},
+          "standard": "ISO 5817 Level D"
+        }
+      ]
+    },
+    {
+      "image_id": "THERMAL_P104_MOTOR_DE",
+      "component": "Drive End Induction Motor Housing",
+      "modality": "FLIR Thermal Radiometry",
+      "hotspot_temp_c": 104.2,
+      "ambient_temp_c": 32.0,
+      "severity": "MAJOR"
+    }
+  ]
+}

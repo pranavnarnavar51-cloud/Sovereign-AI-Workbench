@@ -1,0 +1,11 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ComplianceRuleEngineTool",
+  "description": "Evaluates operations against OSHA 1910, ISO 45001, and ISO 10816 industrial standards",
+  "type": "object",
+  "required": ["standard", "parameters"],
+  "properties": {
+    "standard": {"type": "string", "enum": ["ISO_10816_3", "OSHA_1910_LOTO", "ASME_BPVC_SEC_VIII"]},
+    "parameters": {"type": "object"}
+  }
+}

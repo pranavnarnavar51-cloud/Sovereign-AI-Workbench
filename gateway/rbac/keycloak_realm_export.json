@@ -1,0 +1,38 @@
+{
+  "realm": "sovereign-industrial",
+  "enabled": true,
+  "roles": {
+    "realm": [
+      {
+        "name": "PLANT_DIRECTOR",
+        "description": "Supreme executive authority. Clearance Level 5. Full HITL signoff and override privileges."
+      },
+      {
+        "name": "LEAD_RELIABILITY_ENGINEER",
+        "description": "Clearance Level 4. Authorized for maintenance work orders and telemetry overrides."
+      },
+      {
+        "name": "SAFETY_COMPLIANCE_OFFICER",
+        "description": "Clearance Level 4. Authorized for emergency hazard shutdowns and incident logging."
+      },
+      {
+        "name": "CONTROL_ROOM_OPERATOR",
+        "description": "Clearance Level 2. Read telemetry, request diagnostic reports."
+      }
+    ]
+  },
+  "users": [
+    {
+      "username": "director_sharma",
+      "email": "m.sharma@sovereign.plant07.internal",
+      "enabled": true,
+      "realmRoles": ["PLANT_DIRECTOR"]
+    },
+    {
+      "username": "engineer_kulkarni",
+      "email": "r.kulkarni@sovereign.plant07.internal",
+      "enabled": true,
+      "realmRoles": ["LEAD_RELIABILITY_ENGINEER"]
+    }
+  ]
+}

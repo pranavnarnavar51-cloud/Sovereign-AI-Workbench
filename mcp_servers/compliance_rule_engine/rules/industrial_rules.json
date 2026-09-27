@@ -1,0 +1,22 @@
+{
+  "ISO_10816_3": {
+    "standard_name": "Mechanical Vibration - Evaluation of Machine Vibration on Non-Rotating Parts",
+    "group_2_rigid_foundation": {
+      "Zone_A_limit": 2.3,
+      "Zone_B_limit": 4.5,
+      "Zone_C_limit": 7.1,
+      "Zone_D_limit": 11.2
+    }
+  },
+  "OSHA_1910_LOTO": {
+    "standard_name": "The Control of Hazardous Energy (Lockout/Tagout)",
+    "mandatory_steps": [
+      "Notify affected employees",
+      "Shut down equipment via normal stopping procedure",
+      "Isolate all primary and secondary energy sources",
+      "Apply Lockout/Tagout devices to energy isolating valves",
+      "Dissipate residual thermal and hydraulic pressure",
+      "Verify zero-energy state via pressure gauge bleeding"
+    ]
+  }
+}

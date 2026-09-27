@@ -1,0 +1,140 @@
+version: '3.8'
+
+services:
+  # ==========================================
+  # Layer 2 - Local Ollama Inference Engine
+  # ==========================================
+  ollama:
+    image: ollama/ollama:latest
+    container_name: sovereign_ollama
+    restart: unless-stopped
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_storage:/root/.ollama
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    networks:
+      - airgap_internal_net
+
+  # ==========================================
+  # Layer 3 - Sovereign Data Stores
+  # ==========================================
+  qdrant:
+    image: qdrant/qdrant:v1.11.0
+    container_name: sovereign_qdrant
+    restart: unless-stopped
+    ports:
+      - "6333:6333"
+      - "6334:6334"
+    volumes:
+      - qdrant_storage:/qdrant/storage
+    networks:
+      - airgap_internal_net
+
+  neo4j:
+    image: neo4j:5.20-community
+    container_name: sovereign_neo4j
+    restart: unless-stopped
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    environment:
+      - NEO4J_AUTH=neo4j/SovereignAirGap2026!
+      - NEO4J_PLUGINS=["apoc"]
+    volumes:
+      - neo4j_data:/data
+    networks:
+      - airgap_internal_net
+
+  timescaledb:
+    image: timescale/timescaledb:latest-pg16
+    container_name: sovereign_timescaledb
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=sovereign_admin
+      - POSTGRES_PASSWORD=SovereignIndustrialPass2026!
+      - POSTGRES_DB=industrial_telemetry
+    volumes:
+      - timescale_data:/var/lib/postgresql/data
+    networks:
+      - airgap_internal_net
+
+  # ==========================================
+  # Layer 4 - Security Gateway & LiteLLM Proxy
+  # ==========================================
+  litellm-proxy:
+    image: ghcr.io/berriai/litellm:main-latest
+    container_name: sovereign_litellm
+    restart: unless-stopped
+    ports:
+      - "4000:4000"
+    environment:
+      - STORE_MODEL_IN_DB=False
+    volumes:
+      - ./gateway/litellm_proxy/config.yaml:/app/config.yaml
+    command: ["--config", "/app/config.yaml", "--port", "4000", "--host", "0.0.0.0"]
+    depends_on:
+      - ollama
+    networks:
+      - airgap_internal_net
+
+  # ==========================================
+  # Layer 1 & 4 - Unified Agent Backend Gateway
+  # ==========================================
+  backend:
+    build:
+      context: .
+      dockerfile: infra/docker/sandbox.Dockerfile
+    container_name: sovereign_backend
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - OLLAMA_HOST=http://ollama:11434
+      - QDRANT_HOST=qdrant
+      - NEO4J_URI=bolt://neo4j:7687
+      - NEO4J_AUTH=neo4j/SovereignAirGap2026!
+      - TIMESCALE_HOST=timescaledb
+      - AIR_GAP_MODE=true
+    depends_on:
+      - ollama
+      - qdrant
+      - neo4j
+      - timescaledb
+    networks:
+      - airgap_internal_net
+
+  # ==========================================
+  # Layer 5 - Sovereign Workbench UI
+  # ==========================================
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: ../infra/docker/frontend.Dockerfile
+    container_name: sovereign_frontend
+    restart: unless-stopped
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
+    networks:
+      - airgap_internal_net
+
+networks:
+  airgap_internal_net:
+    driver: bridge
+    internal: false # In production, set internal: true for strict zero-egress air-gap isolation
+
+volumes:
+  ollama_storage:
+  qdrant_storage:
+  neo4j_data:
+  timescale_data:

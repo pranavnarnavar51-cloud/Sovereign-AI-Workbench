@@ -1,0 +1,21 @@
+# Helm values for air-gapped Qdrant Vector DB
+replicaCount: 1
+image:
+  repository: qdrant/qdrant
+  tag: v1.11.0
+service:
+  type: ClusterIP
+  ports:
+    http: 6333
+    grpc: 6334
+persistence:
+  enabled: true
+  size: 200Gi
+  storageClassName: "local-nvme"
+resources:
+  limits:
+    cpu: "8"
+    memory: "32Gi"
+  requests:
+    cpu: "4"
+    memory: "16Gi"

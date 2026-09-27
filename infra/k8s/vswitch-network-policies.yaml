@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: airgap-egress-deny-all
+  namespace: sovereign-industrial
+spec:
+  podSelector: {} # Applies to all pods in namespace
+  policyTypes:
+  - Ingress
+  - Egress
+  ingress:
+  - from:
+    - podSelector: {} # Allow intra-namespace traffic between microservices
+  egress:
+  - to:
+    - podSelector: {} # Allow pod-to-pod within sovereign-industrial namespace only
+  # Note: Zero external IP blocks are defined in egress -> Deny all outside traffic

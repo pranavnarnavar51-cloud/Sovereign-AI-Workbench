@@ -1,0 +1,16 @@
+# Helm values for air-gapped Neo4j Graph DB
+replicaCount: 1
+image:
+  repository: neo4j
+  tag: 5.20-community
+env:
+  NEO4J_AUTH: "neo4j/SovereignAirGap2026!"
+  NEO4J_PLUGINS: '["apoc"]'
+service:
+  type: ClusterIP
+  ports:
+    http: 7474
+    bolt: 7687
+persistence:
+  enabled: true
+  size: 150Gi

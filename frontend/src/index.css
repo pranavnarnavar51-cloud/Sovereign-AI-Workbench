@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  color-scheme: dark;
+}
+
+code, pre {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Custom WhatsApp-style scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #374248;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #54656f;
+}
+
+/* WhatsApp subtle pattern background */
+.wa-bg-pattern {
+  background-color: #0b141a;
+  background-image: radial-gradient(#182229 1px, transparent 1px);
+  background-size: 24px 24px;
+}

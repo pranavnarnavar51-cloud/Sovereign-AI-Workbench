@@ -1,0 +1,17 @@
+{
+  "drawing_id": "CAD-DWG-BFP-104-DE-ASSEMBLY",
+  "equipment": "BFP-P-104",
+  "revisions": [
+    {"rev": "A", "date": "2020-01-10", "approved_by": "Chief Engineer R. Kulkarni"},
+    {"rev": "C", "date": "2024-08-15", "approved_by": "Director M. Sharma"}
+  ],
+  "bearings": {
+    "de_bearing_type": "SKF 7318 BECBM Angular Contact Ball Bearing",
+    "radial_clearance_micron": "35-50",
+    "shaft_runout_max_mm": 0.02
+  },
+  "casing_bolting": {
+    "bolt_grade": "ASTM A193 B7",
+    "tightening_torque_nm": 420
+  }
+}

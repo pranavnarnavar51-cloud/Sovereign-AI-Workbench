@@ -1,0 +1,11 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CADMetadataParserTool",
+  "description": "Extracts mechanical tolerances, material grades, and assembly fit from CAD schematics",
+  "type": "object",
+  "required": ["drawing_reference"],
+  "properties": {
+    "drawing_reference": {"type": "string"},
+    "component_part": {"type": "string"}
+  }
+}

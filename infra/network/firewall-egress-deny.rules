@@ -1,0 +1,26 @@
+# ==============================================================================
+# Sovereign Industrial Air-Gap Firewall Egress Rules (iptables / Windows netsh)
+# Enforces IEC 62443 Zone & Conduit Isolation: Zero Outbound Public Egress
+# ==============================================================================
+
+# Flush existing non-compliant chains
+# iptables -F OUTPUT
+
+# Allow loopback communication (Localhost intra-agent communication)
+# iptables -A OUTPUT -o lo -j ACCEPT
+
+# Allow established and related internal connections
+# iptables -A OUTPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+
+# Allow strictly internal industrial subnets (10.240.0.0/16 - On-Premise Industrial Bus)
+# iptables -A OUTPUT -d 10.240.0.0/16 -j ACCEPT
+# iptables -A OUTPUT -d 127.0.0.1/32 -j ACCEPT
+
+# DROP and LOG all other egress packets to external WAN / Internet
+# iptables -A OUTPUT -j LOG --log-prefix "[SOVEREIGN AIRGAP EGRESS BLOCKED]: " --log-level 4
+# iptables -A OUTPUT -j DROP
+
+# Equivalent Windows Firewall command for deployment:
+# netsh advfirewall set allprofiles firewallpolicy blockinbound,blockoutbound
+# netsh advfirewall firewall add rule name="Allow-Localhost-In" dir=in action=allow localip=127.0.0.1 remoteip=127.0.0.1
+# netsh advfirewall firewall add rule name="Allow-Localhost-Out" dir=out action=allow localip=127.0.0.1 remoteip=127.0.0.1
